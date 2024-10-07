@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mode of Payment</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(to bottom right, #e8f1fc, #cfe0f4, #d9e6f7); /* Cool and calm blue-based gradient */
+                color: #333; /* Slightly darker text for contrast */
+            }
+
+            #header {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                padding: 0 20px; /* Reduced padding for minimalist look */
+                align-items: center;
+                margin-bottom: auto;
+                background: linear-gradient(to bottom right, #7faed9, #d0e4f7); /* Deeper, cooler blue gradient */
+                border-bottom: 1px solid #ccc; /* Slightly darker border for better separation */
+            }
+
+            #header-text {
+                text-align: center;
+            }
+
+            #header-text div {
+                margin: 5px 0;
+                font-size: 1.2rem; /* Responsive font size */
+            }
+
+            #course {
+                font-weight: bold;
+                font-size: 1rem; /* Adjusted font size */
+            }
+
+            #slsulogo,
+            #celogo,
+            #icpep {
+                display: block;
+                margin: 0 15px; /* Adjusted margin to align logos better */
+            }
+
+            #slsulogo {
+                width: 110px; /* Adjusted width */
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            #celogo {
+                width: 110px; /* Adjusted width */
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            #icpep {
+                width: 140px; /* Adjusted width */
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            #front-text {
+                font-weight: bold;
+                color: #333;
+                margin-top: 50px;
+                padding: 0 20px; /* Adjusted padding */
+                text-align: center;
+            }
+
+            /* Ensure the interface doesn't overflow */
+            html, body {
+                max-width: 100vw;
+                max-height: 100vh;
+                overflow: hidden;
+            }
+
+            /* page 3 */
+            .payment-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh; /* Full height of the screen */
+                text-align: center;
+                padding: 0; /* Removed any extra padding */
+                margin: 0; /* Removed default margins for the container */
+            }
+
+            /* Center the payment options */
+            .payment-options {
+                display: flex;
+                justify-content: center; /* Center the payment options */
+                gap: 60px;
+                margin-top: 0; /* Removed top margin to center on screen */
+            }
+
+            /* Payment option styling */
+            .payment-option {
+                flex: 1;
+                text-align: left;
+                padding: 15px 15px 10px 15px; /* Adjusted padding: less on the bottom */
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background-color: #f7fafc;
+                transition: transform 0.2s ease, border-color 0.2s ease;
+                cursor: pointer;
+                width: 280px; /* Slightly narrower box */
+                height: 120px; /* Slightly taller to fit more content */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for more depth */
+            }
+
+            .payment-option:hover {
+                transform: scale(1.05); /* Scale up on hover */
+                border-color: #004a99; /* Change border color on hover */
+            }
+
+            /* Payment images */
+            .payment-option img {
+                width: 80px; /* Slightly smaller image */
+                height: 80px;
+                margin-right: 10px;
+            }
+
+            .payment-text {
+                display: flex;
+                align-items: center;
+                font-size: 16px; /* Slightly smaller font for better fit */
+                font-weight: 500; /* Medium weight for better emphasis */
+                color: #333;
+            }
+
+            .payment-title {
+                font-size: 18px; /* Slightly smaller font size */
+                font-weight: bold;
+                margin-bottom: 0; /* Removed margin */
+                padding-bottom: 10px; /* Added slight padding to separate text from options */
+            }
+
+            /* Position the radio button to the left of the text */
+            .payment-text input[type="radio"] {
+                margin-right: 8px;
+                transform: scale(1.2); /* Make radio button slightly larger */
+            }
+
+            /* CSS for selected payment option */
+            .selected {
+                border-color: #004a99;
+                box-shadow: 0 0 10px rgba(0, 74, 153, 0.5); /* Add subtle shadow for emphasis */
+                background-color: #e0f0ff; /* Light background color for selected option */
+            }
+            
+            /* Styling for overall body and layout */
+            body {
+                font-family: 'Arial', sans-serif;
+                font-size: 14px; /* Slightly smaller base font */
+                color: #444; /* Darker text for better contrast */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <img id="slsulogo" src="slsu.png" alt="SLSU Logo">
+            <div id="header-text">
+                <div>SOUTHERN LEYTE STATE UNIVERSITY</div>
+                <div>FACULTY OF ENGINEERING</div>
+                <div id="course">Bachelor of Science in Computer Engineering</div>
+            </div>
+            <img id="celogo" src="celogo.png" alt="CE Logo">
+            <img id="icpep" src="icpeplogo.png" alt="">
+        </div>
+
+        <div class="payment-container">
+            <div class="payment-title">
+                <h2 style="text-align: center; color: #333; font-size: 24px;">Select Mode of Payment</h2>
+            </div>
+            <p style="text-align: center; color: #555; font-size: 16px;">Please choose your preferred payment method below:</p>
+
+            <form id="paymentForm">
+                <div class="payment-options">
+                    <!-- Coin Payment Option -->
+                    <div id="coinPayment" class="payment-option" onclick="selectPaymentMethod('coinPayment')">
+                        <div class="payment-text">
+                            <input id="coinRadio" type="radio" name="payment" value="coin">
+                            <img src="coin.png" alt="Coin Payment">
+                            <span>Coin Payment</span>
+                        </div>
+                    </div>
+
+                    <!-- Bill Payment Option -->
+                    <div id="billPayment" class="payment-option" onclick="selectPaymentMethod('billPayment')">
+                        <div class="payment-text">
+                            <input id="billRadio" type="radio" name="payment" value="bill">
+                            <img src="cash.png" alt="Bill Payment">
+                            <span>Bill Payment</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm Button -->
+                <div style="text-align: center; margin-top: 20px;"> <!-- Adjusted margin-top -->
+                    <button type="button" onclick="confirmPaymentMethod()"
+                        style="padding: 10px 20px; background-color: #1a73e8; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#004a99';" 
+                        onmouseout="this.style.backgroundColor='#1a73e8';">
+                        Confirm Payment Method
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            let port;
+            let writer;
+
+            async function connectSerial() {
+                try {
+                    port = await navigator.serial.requestPort(); // Request a port from the user
+                    await port.open({ baudRate: 9600 }); // Open the port at 9600 baud rate
+                    writer = port.writable.getWriter(); // Get a writer object to send data
+                    console.log('Connected to Arduino');
+                } catch (err) {
+                    console.error('Error connecting to Arduino:', err);
+                    alert('Serial connection not established. Please check the connection.');
+                }
+            }
+
+            async function sendCommand(command) {
+                if (writer) {
+                    const encoder = new TextEncoder();
+                    await writer.write(encoder.encode(command + '\n')); // Send command with a newline
+                    console.log('Sent command:', command);
+                } else {
+                    alert('Serial connection not established. Please check the connection.');
+                }
+            }
+
+            async function selectPaymentMethod(selectedId) {
+                // Remove the 'selected' class from all payment options
+                const options = document.querySelectorAll('.payment-option');
+                options.forEach(option => {
+                    option.classList.remove('selected');
+                });
+
+                // Add the 'selected' class to the currently selected payment option
+                const selectedOption = document.getElementById(selectedId);
+                selectedOption.classList.add('selected');
+            }
+
+            async function confirmPaymentMethod() {
+    const selectedPayment = document.querySelector('input[name="payment"]:checked');
+    if (selectedPayment) {
+        await connectSerial(); // Connect to the Arduino when confirming payment method
+        const paymentMethod = selectedPayment.value;
+        
+        if (paymentMethod === 'coin') {
+            await sendCommand('startCoin'); // Command to start accepting coins
+        } else if (paymentMethod === 'bill') {
+            await sendCommand('startBill'); // Command to start accepting bills
+        }
+        
+        // Redirect to the new HTML file after a short delay (e.g., 1 second)
+        setTimeout(() => {
+            window.location.href = 'coinpay.html'; // Replace with your actual next HTML file name
+        }, 1000); // Adjust the delay as needed
+    } else {
+        alert('Please select a payment method.');
+    }
+}
+
+
+        </script>
+    </body>
+    </html>

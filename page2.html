@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Interface</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #e8f1fc, #cfe0f4, #d9e6f7); /* Cool and calm blue-based gradient */
+            color: #333; /* Slightly darker text for contrast */
+        }
+
+        #header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px; /* Reduced padding for minimalist look */
+            align-items: center;
+            margin-bottom: auto;
+            background: linear-gradient(to bottom right, #7faed9, #d0e4f7); /* Deeper, cooler blue gradient */
+            border-bottom: 1px solid #ccc; /* Slightly darker border for better separation */
+        }
+
+        #header-text {
+            text-align: center;
+        }
+
+        #header-text div {
+            margin: 5px 0;
+            font-size: 1.2rem; /* Responsive font size */
+        }
+
+        #course {
+            font-weight: bold;
+            font-size: 1rem; /* Adjusted font size */
+        }
+
+        #slsulogo,
+        #celogo,
+        #icpep {
+            display: block;
+            margin: 0 15px; /* Adjusted margin to align logos better */
+        }
+
+        #slsulogo {
+            width: 110px; /* Adjusted width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #celogo {
+            width: 110px; /* Adjusted width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #icpep {
+            width: 140px; /* Adjusted width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #front-text {
+            font-weight: bold;
+            color: #333;
+            margin-top: 50px;
+            padding: 0 20px; /* Adjusted padding */
+            text-align: center;
+        }
+
+        /* Ensure the interface doesn't overflow */
+        html, body {
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* page 2 */
+        #form-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 75%; /* Responsive width */
+            max-width: 1000px; /* Sets a comfortable maximum for wide screens */
+            margin: 20px auto; /* Centered form with auto margin */
+            background-color: #fdfdfd; /* Soft white for a cleaner look */
+            border: 1px solid #3a6ea5; /* Subtle blue border for contrast */
+            padding: 30px;
+            border-radius: 12px; /* Slightly larger radius for a polished effect */
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.12); /* Softer shadow for elegance */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+
+        #form-container:hover {
+            background-color: #f1f9ff; /* Subtle light blue on hover for interactive feedback */
+            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2); /* Deeper shadow for hover interaction */
+        }
+
+        #input-fields {
+            flex: 3; /* Take more space in the container */
+            margin-right: 50px;
+            min-width: 250px; /* Ensures minimum width */
+        }
+
+        #stock-display {
+            width: 220px;
+            margin-left: 50px; /* Reduced margin for better responsiveness */
+            min-width: 220px; /* Ensures it doesn't shrink too much */
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 35px; /* Increased margin for bigger gap */
+            flex-wrap: wrap; /* Allows wrapping for smaller screens */
+        }
+
+        .form-group label {
+            width: 150px; /* Reasonable label width */
+            font-weight: 600; /* Semi-bold for a professional tone */
+            font-size: 16px;
+            color: #333; /* Dark gray for text contrast */
+            margin-right: 10px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        select, input[type="number"], input[type="checkbox"] {
+            flex: 2;
+            padding: 12px;
+            border: 1px solid #ced4da; /* Light gray border for a modern look */
+            border-radius: 8px; /* Slightly rounded corners for elegance */
+            font-size: 15px;
+            width: 100%;
+            max-width: 400px; /* Ensures fields don't become too wide */
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input[type="number"]:focus {
+            border-color: #3a6ea5; /* Highlight border on focus */
+            outline: none; /* Removes the default focus outline */
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        /* proceed button */
+        .button-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .button-container button {
+            background-color: #4b7bec; /* Professional blue */
+            border: 3px solid #2c5d9e;
+            color: white;
+            padding: 12px 45px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 23px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #00008b; /* Darker Blue */
+            color: #add8e6; /* Light Blue text on hover */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5); /* Darker background for formality */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f4f4f4; /* Softer white for a refined look */
+            margin: 2% auto;
+            padding: 25px;
+            border: 1px solid #ccc;
+            width: 85%;
+            max-width: 490px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .modal-header, .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem; /* Larger and more readable font size */
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-body {
+            margin: 15px 0;
+            font-size: 1rem; /* Formal and readable size */
+            color: #666; /* Professional grey tone */
+        }
+
+        .modal-footer {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+        }
+
+        .modal-footer button {
+            background-color: #0056b3; /* Professional blue tone */
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 1rem;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-footer button:hover {
+            background-color: #003c82; /* Darker shade on hover */
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem; /* Adjust font size for mobile */
+        }
+
+        .modal-body {
+            font-size: 1.0rem; /* Adjust font size for readability on smaller screens */
+        }
+
+        .modal-footer button {
+            font-size: 0.9rem; /* Smaller buttons for mobile */
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%; /* Wider width for smaller screens */
+                padding: 20px;
+            }
+
+            .modal-content {
+                width: 90%; /* Adjust width for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img id="slsulogo" src="slsu.png" alt="SLSU Logo">
+        <div id="header-text">
+            <div>SOUTHERN LEYTE STATE UNIVERSITY</div>
+            <div>FACULTY OF ENGINEERING</div>
+            <div id="course">Bachelor of Science in Computer Engineering</div>
+        </div>
+        <img id="celogo" src="celogo.png" alt="CE Logo">
+        <img id="icpep" src="icpeplogo.png" alt="">
+    </div>
+
+    <div id="form-container">
+        <div id="input-fields">
+            <div class="form-group">
+                <label for="program">Program:</label>
+                <select id="program" name="program">
+                    <option value="" disabled selected>Select Program</option>
+                    <option value="engineering">Faculty of Engineering</option>
+                    <option value="htm">Faculty of Hospitality and Tourism Management</option>
+                    <option value="csit">Faculty of Computer Studies and Information Technology</option>
+                    <option value="cj">Faculty of Criminal Justice</option>
+                    <option value="education">Faculty of Teacher Education</option>
+                    <option value="ait">Association of Industrial Technology</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Layout:</label>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="lined" name="layout" value="lined" style="margin-right: 10px;">
+                    <label for="lined">Lined Layout</label>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <input type="checkbox" id="unlined" name="layout" value="unlined" style="margin-right: 10px;">
+                    <label for="unlined">Unlined Layout</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value=" " oninput="checkQuantity()">
+            </div>
+        </div> 
+
+        <div id="stock-display">
+            <h3>Available Stock:</h3>
+            <p>Total Booklets: <span id="total-stock">150</span></p>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button type="button" onclick="proceed()">Proceed</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Preview</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="previewContent"></p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="confirmAndProceed()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function proceed() {
+    const quantity = document.getElementById("quantity").value;
+
+    // Send the quantity to the ESP32/Arduino
+    if (quantity >= 1 && quantity <= 10) {
+        sendQuantityToESP(quantity);
+    } else {
+        alert("Please enter a quantity between 1 and 10.");
+    }
+}
+
+function sendQuantityToESP(quantity) {
+    // Send quantity via serial or WebSocket (depending on your setup)
+    console.log(`Sending quantity: ${quantity}`);
+    
+    // Code to send the value to the microcontroller here
+    // Example: Send via WebSocket or Serial communication
+}
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+        }
+    
+        function capitalizeEachWord(string) {
+            return string.split(' ').map(word => capitalizeFirstLetter(word)).join(' ');
+        }
+    
+        function proceed() {
+            const programSelect = document.getElementById("program");
+            const programValue = programSelect.options[programSelect.selectedIndex].text;
+    
+            const program = capitalizeEachWord(programValue);
+            const lined = document.getElementById("lined").checked;
+            const unlined = document.getElementById("unlined").checked;
+            const quantity = document.getElementById("quantity").value;
+    
+            if (!program || (!lined && !unlined)) {
+                alert("Please fill in all required fields and select a layout.");
+                return;
+            }
+    
+            const previewContent = `
+                <strong>Program: </strong> ${program}<br>
+                <strong>Lined Layout: </strong> ${lined ? 'Yes' : 'No'}<br>
+                <strong>Unlined Layout: </strong> ${unlined ? 'Yes' : 'No'}<br>
+                <strong>Quantity: </strong> ${quantity}
+            `;
+            document.getElementById("previewContent").innerHTML = previewContent;
+            document.getElementById("previewModal").style.display = "flex";
+        }
+    
+        function closeModal() {
+            document.getElementById("previewModal").style.display = "none";
+        }
+    
+        function confirmAndProceed() {
+            window.location.href = "page3.html";
+        }
+    
+        function checkQuantity() {
+            const quantityInput = document.getElementById("quantity");
+            if (quantityInput.value < 1) {
+                quantityInput.value = 1;
+            } else if (quantityInput.value > 10) {
+                quantityInput.value = 10;
+            }
+        }
+    </script>    
+</body>
+</html>

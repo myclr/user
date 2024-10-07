@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Coin</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #e8f1fc, #cfe0f4, #d9e6f7);
+            color: #333;
+        }
+
+        #header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px;
+            align-items: center;
+            margin-bottom: auto;
+            background: linear-gradient(to bottom right, #7faed9, #d0e4f7);
+            border-bottom: 1px solid #ccc;
+        }
+
+        #header-text {
+            text-align: center;
+        }
+
+        #header-text div {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+
+        #course {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        #slsulogo,
+        #celogo,
+        #icpep {
+            margin: 0 15px;
+            width: 110px;
+            height: auto;
+        }
+
+        #insert-coin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #coin-gif {
+            width: 300px;
+            height: 180px;
+        }
+
+        #status {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: red;
+        }
+
+        #total-value {
+            margin-top: 10px;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #004a99;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img id="slsulogo" src="slsu.png" alt="SLSU Logo">
+        <div id="header-text">
+            <div>SOUTHERN LEYTE STATE UNIVERSITY</div>
+            <div>FACULTY OF ENGINEERING</div>
+            <div id="course">Bachelor of Science in Computer Engineering</div>
+        </div>
+        <img id="celogo" src="celogo.png" alt="CE Logo">
+        <img id="icpep" src="icpeplogo.png" alt="ICPEP Logo">
+    </div>
+
+    <div id="insert-coin-container">
+        <h2>Insert Coin</h2>
+        <img id="coin-gif" src="insertcoin.gif" alt="Coin Insertion Animation">
+        <div id="status">Payment is Pending...</div>
+        <div id="total-value">Total Value: 0 Pesos</div>
+        <button id="insert-button" class="button">Insert Coin</button>
+        <button id="cancel-button" class="button">Cancel</button>
+    </div>
+
+    <script>
+        let totalValue = 0; // Store total coin value
+        let ws; // WebSocket variable
+        let isInserting = false; // Track if coin insertion is ongoing
+
+        // Initialize WebSocket connection
+        function initWebSocket() {
+            ws = new WebSocket('ws://localhost:81'); // Replace with your actual WebSocket URL
+            
+            ws.onopen = function() {
+                console.log("WebSocket connection opened");
+            };
+
+            ws.onmessage = function(event) {
+                // Parse the message from Arduino
+                const message = event.data;
+                if (message.startsWith("total:")) {
+                    totalValue = parseInt(message.split(":")[1]); // Get the total value after 'total:'
+                    document.getElementById('total-value').textContent = `Total Value: ${totalValue} Pesos`; // Fixed string interpolation
+                }
+            };
+
+            ws.onclose = function() {
+                console.log("WebSocket connection closed");
+            };
+
+            ws.onerror = function(error) {
+                console.error("WebSocket error:", error);
+            };
+        }
+
+        document.getElementById('insert-button').onclick = function() {
+            if (!isInserting) {
+                isInserting = true; // Set flag for coin insertion
+                document.getElementById('insert-button').textContent = 'Confirm'; // Change button to Confirm
+                document.getElementById('status').textContent = 'Insert coins now...'; // Update status
+                sendCoinInsertionCommand(); // Send command to Arduino to start accepting coins
+            } else {
+                // Confirm payment or handle further logic
+                if (totalValue <= 0) {
+                    alert('Please insert coins before confirming.');
+                } else {
+                    // Here you can process the payment or dispense action
+                    window.location.href = 'dispense.html'; // Redirect to the dispense page
+                }
+            }
+        };
+
+        document.getElementById('cancel-button').onclick = function() {
+            // Reset values and states on cancel
+            isInserting = false;
+            totalValue = 0; // Reset total value
+            document.getElementById('total-value').textContent = 'Total Value: 0 Pesos'; // Reset total value display
+            document.getElementById('insert-button').textContent = 'Insert Coin'; // Reset button text
+            document.getElementById('status').textContent = 'Payment is Pending...'; // Reset status
+        };
+
+        function sendCoinInsertionCommand() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send('coinInserted'); // Send command to Arduino to start accepting coins
+                console.log('Sent coin insertion command');
+            } else {
+                alert('WebSocket connection not established. Please check the connection.');
+            }
+        }
+
+        window.onload = function() {
+            initWebSocket(); // Initialize WebSocket on page load
+        };
+    </script>
+</body>
+</html>

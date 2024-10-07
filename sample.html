@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode of Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body style="font-family: Arial, sans-serif; margin: 20px; background: linear-gradient(to right, #f0f4f8, #d9e2ec);">
+
+
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; color: #333; font-size: 24px;">Select Mode of Payment</h2>
+        <p style="text-align: center; color: #555; font-size: 16px;">Please choose your preferred payment method below:</p>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+
+            <!-- Coin Payment Option -->
+            <div id="coinPayment" style="flex: 1; text-align: center; padding: 10px; border: 1px solid #ccc; border-radius: 8px; margin-right: 10px; background-color: #f7fafc; transition: transform 0.2s ease; cursor: pointer;" 
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#004a99';" 
+                 onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ccc';" 
+                 onclick="document.getElementById('coinRadio').checked = true;">
+                <!-- Coin Payment Icon -->
+                <img src="https://via.placeholder.com/100" alt="Coin Payment" style="width: 100px; height: 100px; margin-bottom: 10px;">
+                <h3 style="color: #333; font-size: 18px; margin-bottom: 5px;">Coin Payment</h3>
+                <input id="coinRadio" type="radio" name="payment" value="coin" style="margin-top: 10px;">
+            </div>
+
+            <!-- Bill Payment Option -->
+            <div id="billPayment" style="flex: 1; text-align: center; padding: 10px; border: 1px solid #ccc; border-radius: 8px; margin-left: 10px; background-color: #f7fafc; transition: transform 0.2s ease; cursor: pointer;" 
+                 onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#004a99';" 
+                 onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#ccc';" 
+                 onclick="document.getElementById('billRadio').checked = true;">
+                <!-- Bill Payment Icon -->
+                <img src="https://via.placeholder.com/100" alt="Bill Payment" style="width: 100px; height: 100px; margin-bottom: 10px;">
+                <h3 style="color: #333; font-size: 18px; margin-bottom: 5px;">Bill Payment</h3>
+                <input id="billRadio" type="radio" name="payment" value="bill" style="margin-top: 10px;">
+            </div>
+
+        </div>
+
+        <!-- Confirm Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button style="padding: 10px 20px; background-color: #1a73e8; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;"
+                onmouseover="this.style.backgroundColor='#004a99';" 
+                onmouseout="this.style.backgroundColor='#1a73e8';">
+                Confirm Payment Method
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
