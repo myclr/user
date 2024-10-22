@@ -1,0 +1,93 @@
+body {
+    background: linear-gradient(90deg, #8d72c2, #12c5ed, #f1f1f6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 50px;
+    align-items: center;
+    margin-bottom: auto;
+}
+
+#header-text div {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 2vw;
+}
+
+#course {
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+
+#slsulogo {
+    width: 160px;
+    height: 160px;
+    padding: 0 20px;
+}
+#celogo {
+    width: 140px;
+    height: 140px;
+}
+#icpep {
+    width: 170px;
+    height: 170px;
+}
+
+#front-text {
+    position: absolute;
+    left: 100px;
+    font-weight: bold;
+    color: black;
+    margin-top: 500px;
+    padding: 0 50px;   
+}
+
+#front-text {
+    text-align: center;
+    font-size: 80px;
+    margin-top: 520px;
+    font-family: 'Verdana, sans-serif';
+}
+#front-text div {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 60px;
+}
+
+.button {
+    background-color: hsl(197, 60%, 48%);
+    border: 5px solid #07518e;
+    color: white;
+    padding: 15px 35px; /* Wider size */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 23px;
+    font-family: Arial;
+    font-weight: bold;
+    margin: 5px 5px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.button:hover {
+    background-color: #00008b; /* Darker Blue */
+    color: #add8e6; /* Light Blue text on hover */
+}
+
+/* Ensure the interface doesn't overflow */
+html, body {
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mode of Payment</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #8d72c2, #12c5ed, #f1f1f6);
+            color: #333; /* Slightly darker text for contrast */
+        }
+
+        #header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px; /* Reduced padding for minimalist look */
+            align-items: center;
+            margin-bottom: auto;
+            
+        }
+
+        #header-text {
+            text-align: center;
+        }
+#header-text div {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 2vw;
+}
+
+#course {
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+        #header-text div {
+            margin: 5px 0;
+            font-size: 1.2rem; /* Responsive font size */
+        }
+
+        #course {
+            font-weight: bold;
+            font-size: 1rem; /* Adjusted font size */
+        }
+#slsulogo {
+    width: 160px;
+    height: 160px;
+    padding: 0 20px;
+}
+#celogo {
+    width: 140px;
+    height: 140px;
+}
+#icpep {
+    width: 170px;
+    height: 170px;
+}
+#slsulogo {
+    width: 160px;
+    height: 160px;
+    padding: 0 20px;
+}
+#celogo {
+    width: 140px;
+    height: 140px;
+}
+#icpep {
+    width: 170px;
+    height: 170px;
+}
+
+        #front-text {
+            font-weight: bold;
+            color: #333;
+            margin-top: 50px;
+            padding: 0 20px; /* Adjusted padding */
+            text-align: center;
+        }
+
+        /* Ensure the interface doesn't overflow */
+        html, body {
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* page 3 */
+        .payment-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height of the screen */
+            text-align: center;
+            padding: 0; /* Removed any extra padding */
+            margin: 0; /* Removed default margins for the container */
+        }
+
+        /* Center the payment options */
+        .payment-options {
+            display: flex;
+            justify-content: center; /* Center the payment options */
+            gap: 60px;
+            margin-top: 0; /* Removed top margin to center on screen */
+        }
+
+        /* Payment option styling */
+        .payment-option {
+            flex: 1;
+            text-align: left;
+            padding: 15px 15px 10px 15px; /* Adjusted padding: less on the bottom */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f7fafc;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            width: 280px; /* Slightly narrower box */
+            height: 120px; /* Slightly taller to fit more content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for more depth */
+        }
+
+        .payment-option:hover {
+            transform: scale(1.05); /* Scale up on hover */
+            border-color: #004a99; /* Change border color on hover */
+        }
+
+        /* Payment images */
+        .payment-option img {
+            width: 80px; /* Slightly smaller image */
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .payment-text {
+            display: flex;
+            align-items: center;
+            font-size: 16px; /* Slightly smaller font for better fit */
+            font-weight: 500; /* Medium weight for better emphasis */
+            color: #333;
+        }
+
+        .payment-title {
+            font-size: 18px; /* Slightly smaller font size */
+            font-weight: bold;
+            margin-bottom: 0; /* Removed margin */
+            padding-bottom: 10px; /* Added slight padding to separate text from options */
+        }
+
+        /* Position the radio button to the left of the text */
+        .payment-text input[type="radio"] {
+            margin-right: 8px;
+            transform: scale(1.2); /* Make radio button slightly larger */
+        }
+
+        /* CSS for selected payment option */
+        .selected {
+            border-color: #004a99;
+            box-shadow: 0 0 10px rgba(0, 74, 153, 0.5); /* Add subtle shadow for emphasis */
+            background-color: #e0f0ff; /* Light background color for selected option */
+        }
+        
+        /* Styling for overall body and layout */
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px; /* Slightly smaller base font */
+            color: #444; /* Darker text for better contrast */
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img id="slsulogo" src="slsu.png" alt="SLSU Logo">
+        <div id="header-text">
+            <div>SOUTHERN LEYTE STATE UNIVERSITY</div>
+            <div>FACULTY OF ENGINEERING</div>
+            <div id="course">Bachelor of Science in Computer Engineering</div>
+        </div>
+        <img id="celogo" src="celogo.png" alt="CE Logo">
+        <img id="icpep" src="icpeplogo.png" alt="">
+    </div>
+
+    <div class="payment-container">
+    <div class="payment-title">
+    <h2 style="text-align: center; color: #333; font-size: 24px;">Select Mode of Payment</h2> </div>
+    <p style="text-align: center; color: #555; font-size: 16px;">Please choose your preferred payment method below:</p>
+
+    <form id="paymentForm">
+        <div class="payment-options">
+            <!-- Coin Payment Option -->
+            <div id="coinPayment" class="payment-option" onclick="selectPaymentMethod('coinPayment')">
+                <div class="payment-text">
+                    <input id="coinRadio" type="radio" name="payment" value="coin">
+                    <img src="coin.png" alt="Coin Payment">
+                    <span>Coin Payment</span>
+                </div>
+            </div>
+
+            <!-- Bill Payment Option -->
+            <div id="billPayment" class="payment-option" onclick="selectPaymentMethod('billPayment')">
+                <div class="payment-text">
+                    <input id="billRadio" type="radio" name="payment" value="bill">
+                    <img src="cash.png" alt="Bill Payment">
+                    <span>Bill Payment</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Confirm Button -->
+        <div style="text-align: center; margin-top: 2px;"> <!-- Adjusted margin-top -->
+            <button type="button" onclick="confirmPaymentMethod()"
+                style="padding: 10px 20px; background-color: #1a73e8; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;"
+                onmouseover="this.style.backgroundColor='#004a99';" 
+                onmouseout="this.style.backgroundColor='#1a73e8';">
+                Confirm Payment Method
+            </button>
+        </div>
+    </form>
+
+    <script>
+        function selectPaymentMethod(selectedId) {
+            // Remove the 'selected' class from all payment options
+            document.getElementById('coinPayment').classList.remove('selected');
+            document.getElementById('billPayment').classList.remove('selected');
+            
+            // Add the 'selected' class to the chosen payment option
+            document.getElementById(selectedId).classList.add('selected');
+            
+            // Check the corresponding radio button
+            if (selectedId === 'coinPayment') {
+                document.getElementById('coinRadio').checked = true;
+            } else if (selectedId === 'billPayment') {
+                document.getElementById('billRadio').checked = true;
+            }
+        }
+
+        function confirmPaymentMethod() {
+            // Get the selected payment method
+            const selectedOption = document.querySelector('input[name="payment"]:checked');
+            
+            if (selectedOption) {
+                // Redirect based on the selected payment method
+                if (selectedOption.value === 'coin') {
+                    window.location.href = 'coinpay.html';
+                } else if (selectedOption.value === 'bill') {
+                    window.location.href = 'cashpay.html';
+                }
+            } else {
+                alert('Please select a payment method.');
+            }
+        }
+    </script>
+
+</body>
+</html>
